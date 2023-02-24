@@ -4,7 +4,7 @@ import styles from '../styles/styles.module.css';
 
 
 export interface Props {
-    title:string;
+    title?:string;
     className?:string;
     style?: CSSProperties;
 }

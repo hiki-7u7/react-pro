@@ -1,46 +1,79 @@
+import { products } from "../../data/products";
 import { ProductButtons, ProductCard, ProductImage, ProductTitle } from "../components/"
 import '../styles/styles-custom.css';
+import { useShopingCart } from '../hooks/useShopingCart';
 
-const product = {
-  id:'123',
-  title:'Coffe XD',
-  img:'./coffee-mug.png'
-}
+
 
 export const ShopingPage = () => {
-  return (
-    <div>
-      <h1>ShopingPage</h1>
-      <hr />
-      <div style={{
-        display:'flex',
-        flexDirection:'row',
-        flexWrap:'wrap'
-      }}>
+
+    const { onProductCartChange, shopingCart } = useShopingCart();
+
+    return (
+        <div>
+        <h1>ShopingPage</h1>
+        <hr />
+        <div style={{
+            display:'flex',
+            flexDirection:'row',
+            flexWrap:'wrap'
+        }}>
 
 
-      <ProductCard product={product} className="bg-dark">
+        {
+            products.map( pro => {
 
-          <ProductCard.Image className="custom-image"/>
-          <ProductCard.Title title="Coffe?" className="text-white"/>
-          <ProductCard.Buttons className="custom-buttons"/>
+            return <ProductCard
+                key={ pro.id }
+                product={pro}
+                className="bg-dark"
+                onChange={ onProductCartChange }
+                value={ shopingCart[ pro.id ]?.count || 0 }
 
-      </ ProductCard >
 
+            >
 
-      <ProductCard 
-        product={product} 
-        className="bg-dark"
+                <ProductImage className="custom-image"/>
+                <ProductTitle title={ pro.title } className="text-white" />
+                <ProductButtons  className="custom-buttons"/>
+
+            </ ProductCard >
+
+            })
+        }
+
+        <div className="shoping-cart">
+            {
+                Object.values(shopingCart).map( pro => {
+
+                    return <ProductCard
+                    key={ pro.id }
+                    product={pro}
+                    className="bg-dark"
+                    style={{ width:'150px' }}
+                    onChange={ onProductCartChange }
+                    value={ pro.count }
+                    >
+
+                    <ProductImage className="custom-image"/>
+                    <ProductButtons  className="custom-buttons"/>
+
+                    </ ProductCard >
+
+                })
+            }
+        </div>  
+
+        <div>
         
-      >
+            <code>
+            { JSON.stringify(shopingCart) }
+            </code>
 
-          <ProductImage className="custom-image"/>
-          <ProductTitle title="Hola mundo" className="text-white" />
-          <ProductButtons  className="custom-buttons"/>
+        </div>
 
-      </ ProductCard >
-
-      </div>
-    </div>
-  )
+        </div>
+        </div>
+    )
 }
+
