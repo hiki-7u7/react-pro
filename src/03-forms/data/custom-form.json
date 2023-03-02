@@ -1,0 +1,57 @@
+[
+    {
+        "type": "text",
+        "name": "firstName",
+        "placeholder": "First Name",
+        "label": "First Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            },
+            {
+                "type": "minlegth",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "placeholder": "Email",
+        "label": "Email",
+        "value": "user@gmail.com",
+        "validations": [
+            {
+                "type": "required"
+            },
+            {
+                "type": "email"
+            }
+        ]
+    },
+    {
+        "type": "select",
+        "name": "select",
+        "label": "Email",
+        "options": [
+            {
+                "id": 1,
+                "label": "Metal slug"
+            },
+            {
+                "id": 2,
+                "label": "Bomberman"
+            },
+            {
+                "id": 3,
+                "label": "Mario Bross"
+            }
+        ],
+        "validations": [
+            {
+                "type": "required"
+            }
+        ]
+    }
+]
